@@ -1,9 +1,10 @@
-% \symdivine{}
-% Henrich Lauko
-
 ---
-subtitle: Tree Compression (SEFM 2015),\newline
-    Weak-Memory as LLVM-2-LLVM (MEMICS 2015)
+title: $\nicefrac{1}{2} \text{\divine} + \text{\divine} = 1 \text{ and } \nicefrac{1}{4} \text{\divine}$
+author: Henrich Lauko
 header-includes:
     - \usepackage{divine}
-lang: czech
+    - \usepackage{units}
+lang: english
+...
+
+## Recapitulation
