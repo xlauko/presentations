@@ -1,0 +1,7 @@
+input file: linked-list.cpp
+compile options:
+  - -std=c++1
+  - linked-list.cpp
+input options:
+  sys.0: nofail:malloc
+  divine.bcname: linked-list.cpp

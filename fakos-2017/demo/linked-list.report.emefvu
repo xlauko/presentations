@@ -1,0 +1,166 @@
+input file: linked-list.cpp
+compile options:
+  - -std=c++14
+  - linked-list.cpp
+input options:
+  sys.0: nofail:malloc
+  divine.bcname: linked-list.cpp
+symbolic: 1
+
+state count: 5
+states per second: 9.61538
+version: 4.0.12+11dc4f2cdfb9
+
+architecture: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz
+memory used: 1249904
+physical memory used: 560348
+user time: 9.397796
+system time: 0.169899
+wall time: 9.578282
+fragment memory:
+  total: { items: 5314, used: 10078209, held: 10979120 }
+  1: { items: 43, used: 43, held: 16352 }
+  2: { items: 1, used: 2, held: 4088 }
+  4: { items: 127, used: 508, held: 16352 }
+  8: { items: 333, used: 2664, held: 16352 }
+  9: { items: 14, used: 126, held: 8160 }
+  10: { items: 1, used: 10, held: 4080 }
+  12: { items: 20, used: 240, held: 8160 }
+  13: { items: 14, used: 182, held: 8160 }
+  16: { items: 2915, used: 46640, held: 110496 }
+  20: { items: 7, used: 140, held: 8160 }
+  24: { items: 571, used: 13704, held: 32688 }
+  25: { items: 2, used: 50, held: 4064 }
+  28: { items: 1, used: 28, held: 4064 }
+  32: { items: 65, used: 2080, held: 12192 }
+  33: { items: 10, used: 330, held: 8160 }
+  40: { items: 14, used: 560, held: 8160 }
+  41: { items: 3, used: 123, held: 8160 }
+  44: { items: 5, used: 220, held: 4080 }
+  48: { items: 77, used: 3696, held: 16320 }
+  49: { items: 29, used: 1421, held: 16352 }
+  50: { items: 4, used: 200, held: 4088 }
+  52: { items: 6, used: 312, held: 4088 }
+  55: { items: 8, used: 440, held: 16352 }
+  56: { items: 8, used: 448, held: 12264 }
+  57: { items: 1, used: 57, held: 4032 }
+  60: { items: 3, used: 180, held: 4032 }
+  61: { items: 159, used: 9699, held: 28416 }
+  64: { items: 5, used: 320, held: 8064 }
+  65: { items: 5, used: 325, held: 8064 }
+  66: { items: 58, used: 3828, held: 12096 }
+  67: { items: 55, used: 3685, held: 12096 }
+  68: { items: 30, used: 2040, held: 12096 }
+  69: { items: 6, used: 414, held: 4032 }
+  70: { items: 88, used: 6160, held: 28440 }
+  72: { items: 2, used: 144, held: 12096 }
+  73: { items: 3, used: 219, held: 12240 }
+  76: { items: 3, used: 228, held: 4080 }
+  77: { items: 6, used: 462, held: 4080 }
+  81: { items: 164, used: 13284, held: 28512 }
+  83: { items: 4, used: 332, held: 4048 }
+  85: { items: 45, used: 3825, held: 16192 }
+  88: { items: 3, used: 264, held: 8096 }
+  89: { items: 18, used: 1602, held: 4032 }
+  92: { items: 4, used: 368, held: 4032 }
+  96: { items: 15, used: 1440, held: 16128 }
+  98: { items: 19, used: 1862, held: 8112 }
+  103: { items: 6, used: 618, held: 4056 }
+  104: { items: 1, used: 104, held: 4056 }
+  105: { items: 9, used: 945, held: 16128 }
+  106: { items: 1, used: 106, held: 4032 }
+  108: { items: 10, used: 1080, held: 4032 }
+  110: { items: 2, used: 220, held: 8064 }
+  113: { items: 1, used: 113, held: 4080 }
+  114: { items: 14, used: 1596, held: 8160 }
+  117: { items: 3, used: 351, held: 12240 }
+  118: { items: 1, used: 118, held: 4080 }
+  121: { items: 11, used: 1331, held: 7936 }
+  122: { items: 1, used: 122, held: 3968 }
+  128: { items: 13, used: 1664, held: 7936 }
+  129: { items: 7, used: 903, held: 8160 }
+  130: { items: 26, used: 3380, held: 12240 }
+  132: { items: 8, used: 1056, held: 12240 }
+  133: { items: 7, used: 931, held: 4080 }
+  134: { items: 1, used: 134, held: 4080 }
+  136: { items: 8, used: 1088, held: 8160 }
+  137: { items: 1, used: 137, held: 4032 }
+  140: { items: 1, used: 140, held: 4032 }
+  141: { items: 1, used: 141, held: 4032 }
+  144: { items: 1, used: 144, held: 4032 }
+  146: { items: 1, used: 146, held: 3952 }
+  152: { items: 1, used: 152, held: 3952 }
+  159: { items: 1, used: 159, held: 4000 }
+  162: { items: 7, used: 1134, held: 8064 }
+  165: { items: 2, used: 330, held: 4032 }
+  168: { items: 1, used: 168, held: 4032 }
+  173: { items: 1, used: 173, held: 4048 }
+  176: { items: 2, used: 352, held: 4048 }
+  177: { items: 1, used: 177, held: 4048 }
+  179: { items: 6, used: 1074, held: 4048 }
+  181: { items: 3, used: 543, held: 4048 }
+  185: { items: 2, used: 370, held: 8064 }
+  186: { items: 2, used: 372, held: 4032 }
+  190: { items: 1, used: 190, held: 4032 }
+  195: { items: 7, used: 1365, held: 8000 }
+  200: { items: 1, used: 200, held: 4000 }
+  201: { items: 10, used: 2010, held: 3952 }
+  202: { items: 1, used: 202, held: 3952 }
+  205: { items: 1, used: 205, held: 3952 }
+  208: { items: 3, used: 624, held: 3952 }
+  213: { items: 7, used: 1491, held: 3888 }
+  220: { items: 4, used: 880, held: 4032 }
+  222: { items: 1, used: 222, held: 4032 }
+  228: { items: 1, used: 228, held: 3944 }
+  232: { items: 2, used: 464, held: 3944 }
+  252: { items: 2, used: 504, held: 3840 }
+  261: { items: 1, used: 261, held: 3960 }
+  265: { items: 1, used: 265, held: 4080 }
+  269: { items: 5, used: 1345, held: 12240 }
+  274: { items: 20, used: 5480, held: 20160 }
+  276: { items: 1, used: 276, held: 3920 }
+  277: { items: 1, used: 277, held: 3920 }
+  303: { items: 2, used: 606, held: 3952 }
+  315: { items: 1, used: 315, held: 3840 }
+  325: { items: 1, used: 325, held: 3936 }
+  343: { items: 2, used: 686, held: 3784 }
+  355: { items: 1, used: 355, held: 3960 }
+  368: { items: 5, used: 1840, held: 12144 }
+  381: { items: 1, used: 381, held: 3840 }
+  409: { items: 1, used: 409, held: 3744 }
+  414: { items: 9, used: 3726, held: 11232 }
+  429: { items: 1, used: 429, held: 3888 }
+  458: { items: 1, used: 458, held: 3712 }
+  471: { items: 1, used: 471, held: 3776 }
+  561: { items: 1, used: 561, held: 3976 }
+  651: { items: 55, used: 35805, held: 92496 }
+  730: { items: 1, used: 730, held: 3680 }
+  761: { items: 1, used: 761, held: 3840 }
+  852: { items: 1, used: 852, held: 3424 }
+  855: { items: 2, used: 1710, held: 3424 }
+  890: { items: 1, used: 890, held: 3584 }
+  902: { items: 1, used: 902, held: 3616 }
+  924: { items: 1, used: 924, held: 3712 }
+  942: { items: 1, used: 942, held: 3776 }
+  991: { items: 6, used: 5946, held: 19840 }
+  1379: { items: 1, used: 1379, held: 2768 }
+  1404: { items: 1, used: 1404, held: 2816 }
+  1457: { items: 1, used: 1457, held: 2928 }
+  2275: { items: 1, used: 2275, held: 2280 }
+  2612: { items: 1, used: 2612, held: 2616 }
+  8460: { items: 2, used: 16920, held: 16928 }
+  3530916: { items: 1, used: 3530916, held: 3530920 }
+  6298256: { items: 1, used: 6298256, held: 6298256 }
+snapshot memory:
+  total: { items: 5, used: 2160, held: 19872 }
+  336: { items: 1, used: 336, held: 4032 }
+  408: { items: 1, used: 408, held: 4080 }
+  444: { items: 2, used: 888, held: 8064 }
+  528: { items: 1, used: 528, held: 3696 }
+timers:
+  lart: 1.3
+  loader: 2.64
+  boot: 1.86
+  search: 0.52
+  ce: 0.002
+error found: no

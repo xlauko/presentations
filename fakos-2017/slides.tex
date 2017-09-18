@@ -1,0 +1,164 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+%\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+%balíček na A4
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsbsy}
+\usepackage{amssymb}
+
+\usepackage{graphicx}
+\usepackage{minted}
+
+%\usepackage{mathpazo}
+
+%\usepackage[mathlf]{MinionPro}
+\usepackage{sansmathfonts}
+%\usepackage[mathlf,textlf]{MyriadPro}
+%\usepackage{mathpazo}
+\usepackage[small]{eulervm}
+%\usepackage{newtxmath}
+
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{pbox}
+\usepackage{mathpartir} %proof trees
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\tikzset{
+   invisible/.style={opacity=0},
+   visible on/.style={alt=#1{}{invisible}},
+   blank/.style={},
+   red on/.style={alt={#1{fill=red!10}{blank}}},
+   alt/.code args={<#1>#2#3}{%
+     \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+   },
+ }
+
+\captionsetup{compatibility=false}
+%\renewcommand{\arraystretch}{1}
+%\hypersetup{pdfpagemode={FullScreen}}
+
+\makeatletter
+    \newenvironment{withoutheadline}{
+        \setbeamertemplate{headline}[default]
+        \def\beamer@entrycode{\vspace*{-\headheight}}
+    }{}
+\makeatother
+
+\title{Instrumentation -- abstract and symbolic verification}
+\author{Henrich Lauko \vspace{-0.3cm}}
+\institute{FAKOS 2017 \vspace{1cm}}
+\date{\today}
+
+\usetheme{Antibes}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+\setbeamertemplate{footline}[frame number]
+
+\definecolor{foreground}{RGB}{255,255,255}
+\definecolor{background}{RGB}{24,24,24}
+% \definecolor{title}{RGB}{107,174,214}
+\definecolor{title}{RGB}{255,255,255}
+\definecolor{main}{RGB}{39,66,96}
+\definecolor{gray}{RGB}{155,155,155}
+\definecolor{subtitle}{RGB}{102,255,204}
+\definecolor{hilight}{RGB}{233,140,5}
+\definecolor{vhilight}{RGB}{251,95,37}
+
+\setbeamercolor{titlelike}{fg=title,bg=main}
+\setbeamercolor{subtitle}{fg=subtitle}
+\setbeamercolor{institute}{fg=gray}
+%\setbeamercolor{normal text}{fg=foreground,bg=background}
+
+\setbeamercolor*{block title}{fg=white, bg=main}
+\setbeamercolor*{block body}{fg=black, bg=main!5}
+\setbeamercolor*{block title example}{fg=white, bg=vhilight!65}
+\setbeamercolor*{block body example}{fg=black, bg=vhilight!10}
+
+\setbeamercolor{item}{fg=main} % color of bullets
+%\setbeamercolor{subitem}{fg=gray}
+\setbeamercolor{alerted text}{fg=hilight}
+\setbeamercolor{description item}{fg=hilight}
+%\setbeamercolor{itemize/enumerate subbody}{fg=gray}
+\setbeamertemplate{itemize subitem}{{\textendash}}
+\setbeamerfont{itemize/enumerate subbody}{size=\small}
+\setbeamerfont{itemize/enumerate subitem}{size=\small}
+
+\DeclareSymbolFont{operators}{\encodingdefault}{ppl}{m}{n}
+\DeclareMathAlphabet{\mathbf}{\encodingdefault}{ppl}{bx}{n}
+\DeclareMathAlphabet{\mathit}{\encodingdefault}{ppl}{m}{it}
+
+\let\otp\titlepage
+\renewcommand{\titlepage}{\otp\addtocounter{framenumber}{-1}}
+
+\lstset{ %this is the stype
+        mathescape=true,
+        frame=tB,
+        numbers=left,
+        numberstyle=\tiny,
+        basicstyle={\ttfamily\scriptsize},
+        keywordstyle=\color{vhilight}\bfseries,
+        keywords={for, do, forall, then, let,  input, output, return, datatype, function, in, if, else, foreach, while, begin, end, SAT, UNSAT, CONFLICT, } %add the keywords you want, or load a language as Rubens explains in his comment above.
+        numbers=left,
+        xleftmargin=.04\textwidth,
+		escapeinside={<@}{@>}
+    }
+
+\newcommand{\sat}{\textcolor{Green}}
+\newcommand{\unsat}{\textcolor{Red}}
+
+\newcommand\Wider[2][3em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
+
+\begin{document}
+
+\begin{frame}[plain]
+ \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Motivation for instrumentation}
+    \begin{itemize}
+        \item DIVINE struggles on programs with input
+        \item Prototype SymDIVINE -- Control-Explicit Data-Symbolic verifiction (CEDS)
+        \item We don't want to complicate core of DIVINE
+        \item Enable various abstractions
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modifications to DIVINE}
+    \begin{itemize}
+        \item Instrument verified program to behave like abstracted program
+        \item New verification algorithm
+        \begin{itemize}
+            \item Using SMT solver to check states equality
+        \end{itemize}
+        \item Algorithm modification is not needed for simpler domains
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{DEMO}
+\end{frame}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,5 @@
+input file: linked-list.cpp
+compile options:
+  - linked-list.cpp
+input options:
+  divine.bcname: linked-list.cpp
