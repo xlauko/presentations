@@ -1,0 +1,3 @@
+[submodule "texstyle"]
+	path = texstyle
+	url = https://github.com/vlstill/texstyle.git
