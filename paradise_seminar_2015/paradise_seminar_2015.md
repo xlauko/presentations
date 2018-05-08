@@ -29,7 +29,7 @@ lang: english
 
     \node [component](clang) {clang -emit-llvm};
     \node [component, below = 0.5 cm of clang](lart) {\lart};
-    
+
     \node [component, right = 0.5 cm of lart, ](interpreter) {\llvm interpreter};
     \node [component, right = 0.5 cm of interpreter, minimum width=1 cm](generator) {State space generator};
 
@@ -47,17 +47,17 @@ lang: english
     \node [left = 1.5 cm of clang] (start) {input.c};
     \node [right = 2 cm of exploration] (end) {};
     \node [below = 2.3 cm of start] (property) {property};
-    
+
     \draw [->, C] (clang) -- (lart);
-    
+
     \draw [->, C] (lart) -- (interpreter);
-    
+
     \draw [<->] (interpreter) -- (generator);
-    
+
     \draw [<->] (smt) -- (generator);
-    
+
     \draw [->] (generator) -- (exploration);
-    
+
     \draw [->, C] (start) -- (clang);
     \draw [->, C] (property) -| (generator);
     \draw [->, textArrow] (exploration) -- (end) node [midway, above = 3pt] {result};
@@ -96,11 +96,11 @@ lang: english
     \node [left = 1.5 cm of clang] (start) {input.c};
     \node [right = 2 cm of divine] (end) {};
     \node [below = 0.8 cm of start] (property) {property};
-    
+
     \draw [->, C] (clang) -- (lart);
-    
+
     \draw [->, C] (lart) -- (divine);
-    
+
     \draw [->, C] (start) -- (clang);
     \draw [->, C] (property) -| (divine);
     \draw [->, textArrow] (divine) -- (end) node [midway, above = 3pt] {result};
@@ -178,9 +178,9 @@ lang: english
     \node [left = 1 cm of clang] (start) {input.ll};
     \node [right = 2 cm of divine] (end) {};
     \node [below = 0.8 cm of start] (property) {property};
-        
+
     \draw [->] (lart) -- (divine);
-    
+
     \draw [->] (start) -- (lart);
     \draw [->] (property) -| (divine.one south);
     \draw [->, textArrow] (divine) -- (end) node [midway, above = 3pt]{result};
@@ -483,9 +483,9 @@ int res2 = function(y, z);
     \node [left = 1 cm of clang] (start) {input.ll};
     \node [right = 2 cm of divine] (end) {};
     \node [below = 0.8 cm of start] (property) {property};
-        
+
     \draw [->] (lart) -- (divine);
-    
+
     \draw [->] (start) -- (lart);
     \draw [->] (property) -| (divine.one south);
     \draw [->, textArrow] (divine) -- (end) node [midway, above = 3pt]{result};
