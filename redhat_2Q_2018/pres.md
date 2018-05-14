@@ -30,7 +30,7 @@ date: 10th May 2018
 \resizebox{\textwidth}{!}{
 \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=4em,initial text=, <->]
 
-\tikzstyle{component}=[draw, text centered, rounded corners=1pt, minimum height=2.8 em, minimum width=2.2 cm, text width=2 cm]
+\tikzstyle{component}=[draw, text centered, rounded corners=1pt, minimum height=2.8 em, minimum width=2.2 cm, text width=3 cm]
 \tikzstyle{outer}=[draw, dotted, thick]
 \tikzstyle{C}=[dashed]
 \tikzstyle{textArrow}=[decorate, decoration={snake, post length=0.1 cm}]
@@ -39,8 +39,8 @@ date: 10th May 2018
 \tikzstyle{symdivine}=[fill=paradisegreen!10]
 \tikzstyle{prepocessing}=[fill=red!10]
 
-    \node [component](clang) {clang + \divine{} libs};
-    \node [component, right = 0.5 cm of clang](lart) {\lart};
+    \node [component](clang) {clang + \\ \divine{} libs};
+    \node [component, right = 0.5 cm of clang](lart) {Transformation};
 
     \node [component, right = 0.5 cm of lart, ](divine) {Magic};
 
@@ -70,7 +70,7 @@ date: 10th May 2018
 
 . . .
 
-- __Diploma thesis:__ prototype that can abstract values on stack
+- __Diploma thesis:__ prototype that can handle values on stack
 
 ## Current Status
 
@@ -98,7 +98,6 @@ date: 10th May 2018
 
 3. __finishing paper resubmition__
     - evaluation should now cover bigger portion of SV-COMP
-    - TODO preliminary results
 
 ## Plans for the rest of 2018
 
@@ -115,10 +114,6 @@ __June -- September__
 . . .
 
 - further work on memory abstractions
-
-. . .
-
-- trip to Aachen to familiarize with local team before Erasmus
 
 . . .
 
