@@ -67,25 +67,36 @@ __Symbolic computation__
 \end{columns}
 
 ## Symbolic Execution {.t .fragile}
-- interpretation-based approach
 
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+    \centering
+    __Interpretation-based__
+    \includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
+\end{column}
+
+\begin{column}{0.5\textwidth}
 \begin{lstlisting}
-  a <- input()   // pc: true
-  b <- input()   // pc: true
-  if (a > 0)    // pc: $a > 0$
-    if (b < 0)  // pc: $a > 0 \wedge b < 0$
-      b <- a + 1 // pc: $a > 0 \wedge b < 0$, data: $b = a + 1$
+a <- input()
+^\textcolor{color-comments}{$pc \equiv [true]$}^
+b <- input()
+^\textcolor{color-comments}{$pc \equiv [true]$}^
+  if (a > 0)
+^\textcolor{color-comments}{$pc \equiv [a > 0]$}^
+    if (b < 0)
+^\textcolor{color-comments}{$pc \equiv [a > 0 \wedge b < 0]$}^
+      b <- a + 1
+^\textcolor{color-comments}{$pc \equiv [a > 0 \wedge b < 0]$}^
+^\textcolor{color-comments}{$data \equiv [b = a + 1]$}^
     else
-      b <- a - 1 // pc: $a > 0 \wedge b \geq 0$, data: $b = a - 1$
+      b <- a - 1
+^\textcolor{color-comments}{$pc \equiv [a > 0 \wedge b \geq 0]$}^
+^\textcolor{color-comments}{$data \equiv [b = a - 1]$}^
 \end{lstlisting}
-
-- interpreter builds __formula__ in some theory of SMT logic:
-    1. data representation: _b = a + 1_
-    2. path condition:      _a > 0_
+\end{column}
+\end{columns}
 
 - program does not know anything about symbolic values
-
-- TODO show apparoach img. here
 
 ## Compilation-based Approach
 
@@ -206,7 +217,7 @@ __Solution:__ use discriminated union type
 
 \begin{lstlisting}
     arr: union[]  <- [1, 2, 3] // either int or sym_int
-    arr[1]: int <- lift(*)
+    arr[1]: union <- lift(*)
 \end{lstlisting}
 
 - similarly deal with recursive structures
@@ -310,13 +321,19 @@ Simpler domains do not even need _SMT_ support (sign domain).
 \end{column}
 \end{columns}
 
-## Results {.t}
+
+\bigskip
+
+
+## Results
+
+- integrated with DIVINE model checker and STP SMT solver (denoted DIVINE*)
 
 __Component sizes:__ (lines of code)
 
 \begin{table}
 \begin{tabular}{l | r  r  r  r }
- & DIVINE & KLEE & SymDIVINE & CBMC \\
+ & DIVINE* & KLEE & SymDIVINE & CBMC \\
 \hline \hline
 symbolic support & 5.4 	 & 24.2 & 7   & 39.8 \\
 shared code 	 & 136.5 & 125  & 423 & 27.5 \\
@@ -325,11 +342,20 @@ shared code 	 & 136.5 & 125  & 423 & 27.5 \\
 
 - reduced complexity of verification tool
 
-\bigskip
+## Results
 
 __SV-COMP Benchmarks:__
 
-TODO
+| tag           | total | DIVINE* | SymDIVINE | CBMC |
+|---------------|------:|--------:|----------:|-----:|
+| array         |   190 | **96**  |        68 |   93 |
+| bitvector     |    32 | **17**  |         9 |    2 |
+| loops         |   178 | **72**  |        67 |    9 |
+| product-lines |   575 | 336     |   **411** |  234 |
+| pthread       |    45 | **9**   |         0 |    1 |
+| recursion     |    81 | **47**  |        43 |   22 |
+| systemc       |    59 | 14      |    **27** |    0 |
+| **total**     |  1160 | 591     |   **625** |  361 |
 
 ## Conclusion
 
