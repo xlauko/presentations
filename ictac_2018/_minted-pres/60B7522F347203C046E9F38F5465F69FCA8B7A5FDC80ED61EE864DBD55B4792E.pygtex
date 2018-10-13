@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-  \PYG{n}{x} \PYG{err}{←} \PYG{n}{input}\PYG{p}{();} \PYG{c+c1}{// x = 7}
-  \PYG{k}{if} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{)}
-    \PYG{p}{...}
-  \PYG{k}{else}
-    \PYG{p}{...}
-\end{Verbatim}
