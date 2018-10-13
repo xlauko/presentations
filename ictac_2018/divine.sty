@@ -1,0 +1,94 @@
+\usepackage{xspace}
+\newcommand{\divine}{\textsf{DIVINE}\xspace}
+\newcommand{\llvm}{\textsf{LLVM}\xspace}
+\newcommand{\divm}{\textsf{DiVM}\xspace}
+\newcommand{\clang}{\textsf{Clang}\xspace}
+\newcommand{\ltl}{LTL\xspace}
+\newcommand{\lart}{\textsf{LART}\xspace}
+\newcommand{\ltol}{$\llvm \rightarrow \llvm$}
+
+\usetikzlibrary{fit,backgrounds,decorations.pathreplacing}
+
+\tikzset{
+    *|/.style={
+        to path={
+            (perpendicular cs: horizontal line through={(\tikztostart)},
+                                 vertical line through={(\tikztotarget)})
+            % is the same as (\tikztostart -| \tikztotarget)
+            % but just to be safe: http://tex.stackexchange.com/a/29781/16595
+            -- (\tikztotarget) \tikztonodes
+        }
+    },
+	|*/.style={to path={
+		(\tikztostart) -- (perpendicular cs: vertical line through={(\tikztostart)},
+											 horizontal line through={(\tikztotarget)})
+    }}
+}
+
+\usepackage{listings}
+\lstdefinelanguage{paper-lang}
+{
+    morecomment = [l]{//},
+    morestring  = [b]"
+}
+
+\usepackage{color}
+\definecolor{color-types}{HTML}{A41D2A}%{CA763B}
+\definecolor{color-symbolic}{HTML}{CA763B}
+\definecolor{color-keywords}{HTML}{166D04}
+\definecolor{color-numbers}{HTML}{65C251} %
+\definecolor{color-comments}{HTML}{3D9286}
+
+\newcommand\digitstyle{\color{color-numbers}}
+\makeatletter
+\newcommand{\ProcessDigit}[1]
+{%
+  \ifnum\lst@mode=\lst@Pmode\relax%
+   {\digitstyle #1}%
+  \else
+    #1%
+  \fi
+}
+\makeatother
+
+\lstset {
+    language        = {paper-lang},
+    basicstyle      = \small\ttfamily,
+    captionpos      = b,
+    extendedchars   = true,
+    tabsize         = 2,
+    columns         = fixed,
+    keepspaces      = true,
+    showstringspaces= false,
+    breaklines      = true,
+    aboveskip       = 0pt,
+    belowskip       = 0pt,
+    commentstyle    = \color{color-comments},
+    mathescape      = true,
+    literate        =
+        {<-}{$\leftarrow{}$}{1}
+        {->}{$\rightarrow{}$}{1}
+        {0}{{{\ProcessDigit{0}}}}1
+        {1}{{{\ProcessDigit{1}}}}1
+        {2}{{{\ProcessDigit{2}}}}1
+        {3}{{{\ProcessDigit{3}}}}1
+        {4}{{{\ProcessDigit{4}}}}1
+        {5}{{{\ProcessDigit{5}}}}1
+        {6}{{{\ProcessDigit{6}}}}1
+        {7}{{{\ProcessDigit{7}}}}1
+        {8}{{{\ProcessDigit{8}}}}1
+        {9}{{{\ProcessDigit{9}}}}1,
+    classoffset     =   1, % types
+    otherkeywords   =   {int, bool, sym_int, sym_bool, union, pointer},
+    morekeywords    =   {int, bool, sym_int, sym_bool, union, pointer},
+    keywordstyle    =   \color{color-types},
+    classoffset     =   2, % keywords
+    otherkeywords   =   {if, else, return},
+    morekeywords    =   {if, else, return},
+    keywordstyle    =   \color{color-keywords},
+    classoffset     =   3, % keywords
+    otherkeywords   =   {lift, sym_add, sym_mul, sym_sub, sym_lt, assume},
+    morekeywords    =   {lift, sym_add, sym_mul, sym_sub, sym_lt, assume},
+    keywordstyle    =   \color{color-symbolic},
+    classoffset     =   0,
+}

@@ -1,0 +1,37 @@
+\documentclass{tikzfig}
+
+\begin{document}
+\begin{tikzpicture}[node distance=1.5em]
+    \node [val] (y1) {$y_1$};
+    \node [val, node distance=0.7em, below=of y1] (x) {$x$};
+    \node [val, node distance=0.7em, below=of x] (y2) {$y_2$};
+
+    \node [op, right=of y1] (p1) {$+$};
+    \node [op, right=of y2] (p2) {$-$};
+
+    \node [constraint, right = of p1] (c1) {$x < 10$};
+    \node [constraint, right = of p2] (c2) {$x \geq 10$};
+    \node [constraint] at (x -| c1) (cx) {\textit{true}};
+
+
+    \node [op, right=of c1] (o1) {$1$};
+    \node [op, right=of c2] (o2) {$1$};
+
+    \node [op] at (cx -| o1) (in) {$?$};
+
+    \draw [ptr] (x) -- (cx);
+    \draw [->, >=stealth] (cx) -- (in);
+
+    \draw [ptr] (y1) -- (p1);
+    \draw [ptr] (y2) -- (p2);
+
+    \draw [->, >=stealth] (c1) -- (in);
+    \draw [->, >=stealth] (c2) -- (in);
+
+    \draw [->, >=stealth] (p1) to [out=30,in=150] (o1);
+    \draw [->, >=stealth] (p2) to [out=-30,in=210] (o2);
+
+    \draw [->, >=stealth] (p1) -- (c1);
+    \draw [->, >=stealth] (p2) -- (c2);
+\end{tikzpicture}
+\end{document}
