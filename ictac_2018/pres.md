@@ -16,193 +16,317 @@ lang: english
 date: 18th October 2018
 ...
 
-## Agenda
-
-1. Context of symbolic computation
-2. Transformation-based approach
-3. Integration to tool with explicit computation
-
-## Symbolic Computation {.t .fragile}
+## Symbolic Computation { .t .fragile}
 
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
-__Explicit computation__
-\begin{itemize}
-    \item variables represent concrete values
-    \item compiled or interpreted programs
-\end{itemize}
+\bigskip
+
+\centering
+\textbf{Interpretation-based}
+\includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
 \end{column}
 \begin{column}{0.5\textwidth}
-__Symbolic computation__
-\begin{itemize}
-    \item variables represent sets of possible values
-    \item mostly interpreted
-\end{itemize}
 \end{column}
 \end{columns}
 
-\begin{columns}[t]
-\begin{column}{0.5\textwidth}
-\begin{lstlisting}
-  x <- input() // x = 7
-  if (x > 0)
-    ...
-  else
-    ...
-\end{lstlisting}
-\end{column}
-\begin{column}{0.5\textwidth}
-\begin{lstlisting}
-  x <- input() // x = {...}
-  if (x > 0)
-    ... // x = {v|v > 0}
-  else
-    ... // x = {v|v <= 0}
-\end{lstlisting}
-\begin{itemize}
-\item verification, test generation,
-      concolic testing
-\end{itemize}
-\end{column}
-\end{columns}
-
-## Symbolic Execution {.t .fragile}
+## Symbolic Computation { .t .fragile}
 
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
-    \centering
-    __Interpretation-based__
-    \includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
-\end{column}
+\bigskip
 
+\centering
+\textbf{Interpretation-based}
+\includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
+\end{column}
 \begin{column}{0.5\textwidth}
-\begin{lstlisting}
+\bigskip
+
+\begin{lstlisting}[numbers=left,xleftmargin=1cm]
 a <- input()
-^\textcolor{color-comments}{$pc \equiv [true]$}^
-b <- input()
-^\textcolor{color-comments}{$pc \equiv [true]$}^
-  if (a > 0)
-^\textcolor{color-comments}{$pc \equiv [a > 0]$}^
-    if (b < 0)
-^\textcolor{color-comments}{$pc \equiv [a > 0 \wedge b < 0]$}^
-      b <- a + 1
-^\textcolor{color-comments}{$pc \equiv [a > 0 \wedge b < 0]$}^
-^\textcolor{color-comments}{$data \equiv [b = a + 1]$}^
-    else
-      b <- a - 1
-^\textcolor{color-comments}{$pc \equiv [a > 0 \wedge b \geq 0]$}^
-^\textcolor{color-comments}{$data \equiv [b = a - 1]$}^
+if (a > 0)
+  b <- a + 1
+else
+  b <- a - 1
 \end{lstlisting}
+
 \end{column}
 \end{columns}
 
-- program does not know anything about symbolic values
+## Symbolic Computation { .t .fragile}
 
-## Compilation-based Approach
-
-- let the program build _data representation_ and _path condition_
-
-\begin{columns}
+\begin{columns}[t]
 \begin{column}{0.5\textwidth}
-    \centering
-    __Interpretation-based__
-    \includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
+\bigskip
+
+\centering
+\textbf{Interpretation-based}
+\includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
 \end{column}
-
 \begin{column}{0.5\textwidth}
-    \centering
-    __Compilation-based__
-    \includegraphics[width=0.9\textwidth]{img/compiler-approach.pdf}
+\bigskip
+
+\begin{lstlisting}[numbers=left,xleftmargin=1cm]
+a <- input()  ^\textcolor{red}{$[true]$}^
+if (a > 0)
+  b <- a + 1
+else
+  b <- a - 1
+\end{lstlisting}
+
+\end{column}
+\end{columns}
+
+## Symbolic Computation { .t .fragile}
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\centering
+\textbf{Interpretation-based}
+\includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
+\end{column}
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\begin{lstlisting}[numbers=left,xleftmargin=1cm]
+a <- input()  ^\textcolor{red}{$[true]$}^
+if (a > 0)   ^\textcolor{red}{$[a > 0]$}^
+  b <- a + 1
+else
+  b <- a - 1
+\end{lstlisting}
+
+\end{column}
+\end{columns}
+
+## Symbolic Computation { .t .fragile}
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\centering
+\textbf{Interpretation-based}
+\includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
+\end{column}
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\begin{lstlisting}[numbers=left,xleftmargin=1cm]
+a <- input()  ^\textcolor{red}{$[true]$}^
+if (a > 0)   ^\textcolor{red}{$[a > 0]$}^
+  b <- a + 1 ^\textcolor{red}{$[a > 0 \wedge b = a + 1]$}^
+else
+  b <- a - 1
+\end{lstlisting}
+
+\end{column}
+\end{columns}
+
+## Symbolic Computation { .t .fragile}
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\centering
+\textbf{Interpretation-based}
+\includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
+\end{column}
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\begin{lstlisting}[numbers=left,xleftmargin=1cm]
+a <- input()  ^\textcolor{red}{$[true]$}^
+if (a > 0)   ^\textcolor{red}{$[a > 0]$}^
+  b <- a + 1 ^\textcolor{red}{$[a > 0 \wedge b = a + 1]$}^
+else
+  b <- a - 1 ^\textcolor{red}{$[a \leq 0 \wedge b = a - 1]$}^
+\end{lstlisting}
+
+\only<2->{
+\begin{itemize}
+    \item multiple possible paths
+    \item maintained in interpreter
+    \item program does not know about symbolic values
+\end{itemize}
+}
+\end{column}
+\end{columns}
+
+## Proposed Symbolic Computation { .t .fragile}
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\centering
+\textbf{Interpretation-based}
+\includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
+\end{column}
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\centering
+\textbf{Compilation-based}
+\includegraphics[width=0.9\textwidth]{img/compiler-approach.pdf}
+\end{column}
+\end{columns}
+
+\only<2->{
+\bigskip
+
+\textbf{Motivation:} minimize complexity of the verification tool
+}
+
+## Proposed Symbolic Computation { .t .fragile}
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\centering
+\begin{lstlisting}[numbers=left,xleftmargin=1cm]
+a <- input()
+if (a > 0)
+  b <- a + 1
+else
+  b <- a - 1
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=left,xleftmargin=1cm]
+a <- sym_input()
+if (sym_gt(a > 0))
+  b <- sym_add(a, 1)
+else
+  b <- sym_sub(a, 1)
+\end{lstlisting}
+
+\end{column}
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\centering
+\textbf{Compilation-based}
+\includegraphics[width=0.9\textwidth]{img/compiler-approach.pdf}
 \end{column}
 \end{columns}
 
 \bigskip
 
-- minimizes complexity of the verification algorithm
+\textbf{Motivation:} minimize complexity of the verification tool
 
 ## Goals
 
-1. mixing of explicit and symbolic computation
-2. expose a small interface to the rest of the system
-3. impose minimal run-time overhead
+\begin{enumerate}
+    \item<1-> mixing of explicit and symbolic computation
+    \item<2-> expose a small interface to the rest of the system
+    \item<3-> impose minimal run-time overhead
+\end{enumerate}
 
-## Transformation of Bitcode {.t .fragile}
+## Transformation of Program {.t .fragile}
+
+1. __syntactically abstract the input program__
 
 \begin{columns}
-\begin{column}{0.4\textwidth}
+\begin{column}{0.42\textwidth}
 \begin{lstlisting}
-  x:int  <- input()
-  y:int  <- factorial(7)
-  z:int  <- x + y
-  b:bool <- y < z
+   x:int  <- input()
+   y:int  <- factorial(7)
+   z:int  <- x + y
+   b:bool <- y < z
 \end{lstlisting}
 \end{column}
-\begin{column}{0.6\textwidth}
+\begin{column}{0.58\textwidth}
 \begin{lstlisting}
-  x: sym_int  <- lift(*)
-  y: int      <- factorial(7)
-  z: sym_int  <- sym_add(x, lift(y))
-  b: sym_bool <- sym_lt(x, z)
+  x: a_int  <- lift(*)
+  y: int    <- factorial(7)
+  z: a_int  <- a_add(x, lift(y))
+  b: a_bool <- a_lt(x, z)
 \end{lstlisting}
 \end{column}
 \end{columns}
 
-\bigskip
+\pause
 
 - transform instructions, types, functions
 - preserve concrete computation
 - lift concrete values
 
-- provide library with implementation of symbolic operations:
-    - `lift`, `lower`, `sym_add`, ...
+\pause
 
-## Generalization of the Transformation
+2. __concretely realize abstraction__
 
-1. syntactically abstract the input program:
-    - values: `int → abstract_int`
-    - instructions: `add → abstract_add`
+\begin{columns}
+\begin{column}{0.7\textwidth}
+\begin{lstlisting}
+   x: sym_int  <- lift(*)
+   y: int    <- factorial(7)
+   z: sym_int  <- sym_add(x, lift(y))
+   b: sym_bool <- sym_lt(x, z)
+\end{lstlisting}
+\end{column}
+\begin{column}{0.3\textwidth}
+\end{column}
+\end{columns}
 
-2. concretely realize abstraction:
-    - values: `abstract_int → sym_int`
-    - instructions: `abstract_add → sym_add`
+- replace abstract calls with provided implementation
 
-- realization inserts an arbitrary domain that is provided
+## Control Flow of Symbolic Program { .t .fragile }
 
-## Closer look on the Transformation 1. {.t .fragile}
-
-1. Branching
+__Problem:__ constrained values by control flow
 
 \begin{columns}[t]
-\begin{column}{0.4\textwidth}
+\begin{column}{0.5\textwidth}
 \begin{lstlisting}
+  x: int <- input()
   cond: bool <- x < 0
   if (cond)
-    ...
+    y: int <- x + 1
   else
     ...
 \end{lstlisting}
 \end{column}
-
-\begin{column}{0.6\textwidth}
-\begin{lstlisting}
-  cond: sym_bool <- sym_lt(x, 0)
-  if (*)
-    x': sym_int <- assume(cond)
-    ...
-  else
-    x': sym_int <- assume(!cond)
-    ...
-\end{lstlisting}
+\begin{column}{0.5\textwidth}
 \begin{itemize}
-    \item \texttt{assume} constrains values of \texttt{x}
-    \item extend \emph{path condition}
+    \item both paths can happen
+    \item x is not constrained
 \end{itemize}
 \end{column}
 \end{columns}
 
-## Closer look on the Transformation 2. {.t .fragile}
+\pause
 
-2. Aggregate types
+\bigskip
+
+__Solution:__ instrument constraint propagation
+
+\begin{columns}[t]
+\begin{column}{0.6\textwidth}
+\begin{lstlisting}
+  x: sym_int <- lift(*)
+  cond: sym_bool <- sym_lt(x, 0)
+  if (*) // nondeterministic
+    x': sym_int <- assume(cond)
+    y : sym_int <- sym_add(x', 1)
+  else
+    x': sym_int <- assume(!cond)
+    ...
+\end{lstlisting}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+    \item assumes extend a path condition
+\end{itemize}
+\end{column}
+\end{columns}
+
+## Types in the Symbolic Program {.t .fragile}
+
+__Problem:__ how to deal with aggregate types?
 
 \begin{lstlisting}
     arr: int[]  <- [1, 2, 3]
@@ -210,6 +334,8 @@ b <- input()
 \end{lstlisting}
 
 - we want to minimize the number of symbolic values
+
+\pause
 
 __Solution:__ use discriminated union type
 
@@ -222,11 +348,11 @@ __Solution:__ use discriminated union type
 
 - similarly deal with recursive structures
 
-## Closer look on the Transformation 3. {.t .fragile}
+TODO image of metadata
 
-3. Function Calls
+## Function Calls {.t .fragile}
 
-- how to transform functions with symbolic arguments?
+__Problem:__ how to transform functions with symbolic arguments?
 
 \vspace{-1em}
 \begin{lstlisting}
@@ -251,6 +377,8 @@ __Solution__: static analysis + use discriminated union
     union foo(a: union, b: union, c: int)
 \end{lstlisting}
 
+# Symbolic Runtime
+
 ## Data Representation {.t .fragile}
 
 
@@ -274,6 +402,8 @@ __Symbolic execution:__
 
 \end{columns}
 
+\pause
+
 \bigskip
 \bigskip
 
@@ -295,6 +425,8 @@ __Branching example:__
 \includegraphics[]{img/branching.pdf}
 \end{column}
 \end{columns}
+
+TODO cycle example?
 
 ## Symbolic Verification Algorithm {.t}
 
@@ -321,13 +453,18 @@ Simpler domains do not even need _SMT_ support (sign domain).
 \end{column}
 \end{columns}
 
+TODO ina domena?
+TODO SMT queries?
 
-\bigskip
 
+## Results {.t}
 
-## Results
+Integrated with DIVINE model checker:
 
-- integrated with DIVINE model checker and STP SMT solver (denoted DIVINE*)
+- LLVM-to-LLVM transformation
+- STP SMT solver.
+
+\pause
 
 __Component sizes:__ (lines of code)
 
@@ -357,6 +494,8 @@ __SV-COMP Benchmarks:__
 | systemc       |    59 | 14      |    **27** |    0 |
 | **total**     |  1160 | 591     |   **625** |  361 |
 
+TODO grafy
+
 ## Conclusion
 
 __Goals__
@@ -367,6 +506,8 @@ __Goals__
    \textcolor{paradisegreen}{\LARGE\checkmark}
 3. impose minimal run-time overhead
    \textcolor{paradisegreen}{\LARGE\checkmark}
+
+\pause
 
 \bigskip
 
