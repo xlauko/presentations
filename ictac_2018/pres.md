@@ -30,7 +30,9 @@ date: 18th October 2018
 \end{column}
 \end{columns}
 
-## Symbolic Computation { .t .fragile}
+## Symbolic Computation { .t .fragile }
+
+\addtocounter{framenumber}{-1}
 
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
@@ -54,7 +56,9 @@ else
 \end{column}
 \end{columns}
 
-## Symbolic Computation { .t .fragile}
+## Symbolic Computation { .t .fragile }
+
+\addtocounter{framenumber}{-1}
 
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
@@ -80,6 +84,8 @@ else
 
 ## Symbolic Computation { .t .fragile}
 
+\addtocounter{framenumber}{-1}
+
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
 \bigskip
@@ -104,6 +110,8 @@ else
 
 ## Symbolic Computation { .t .fragile}
 
+\addtocounter{framenumber}{-1}
+
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
 \bigskip
@@ -128,6 +136,8 @@ else
 
 ## Symbolic Computation { .t .fragile}
 
+\addtocounter{framenumber}{-1}
+
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
 \bigskip
@@ -147,13 +157,38 @@ else
   b <- a - 1 ^\textcolor{red}{$[a \leq 0 \wedge b = a - 1]$}^
 \end{lstlisting}
 
-\only<2->{
+\end{column}
+\end{columns}
+
+## Symbolic Computation { .t .fragile}
+
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\centering
+\textbf{Interpretation-based}
+\includegraphics[width=0.9\textwidth]{img/inter-approach.pdf}
+\end{column}
+\begin{column}{0.5\textwidth}
+\bigskip
+
+\begin{lstlisting}[numbers=left,xleftmargin=1cm]
+a <- input()  ^\textcolor{red}{$[true]$}^
+if (a > 0)   ^\textcolor{red}{$[a > 0]$}^
+  b <- a + 1 ^\textcolor{red}{$[a > 0 \wedge b = a + 1]$}^
+else
+  b <- a - 1 ^\textcolor{red}{$[a \leq 0 \wedge b = a - 1]$}^
+\end{lstlisting}
+
 \begin{itemize}
     \item multiple possible paths
     \item maintained in interpreter
     \item program does not know about symbolic values
 \end{itemize}
-}
+
 \end{column}
 \end{columns}
 
@@ -184,6 +219,8 @@ else
 
 ## Proposed Symbolic Computation { .t .fragile}
 
+\addtocounter{framenumber}{-1}
+
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
 \bigskip
@@ -199,7 +236,7 @@ else
 
 \begin{lstlisting}[numbers=left,xleftmargin=1cm]
 a <- sym_input()
-if (sym_gt(a > 0))
+if (sym_gt(a, 0))
   b <- sym_add(a, 1)
 else
   b <- sym_sub(a, 1)
@@ -227,6 +264,8 @@ else
     \item<3-> impose minimal run-time overhead
 \end{enumerate}
 
+# Transformation
+
 ## Transformation of Program {.t .fragile}
 
 1. __syntactically abstract the input program__
@@ -237,7 +276,7 @@ else
    x:int  <- input()
    y:int  <- factorial(7)
    z:int  <- x + y
-   b:bool <- y < z
+   b:bool <- z < 0
 \end{lstlisting}
 \end{column}
 \begin{column}{0.58\textwidth}
@@ -245,7 +284,7 @@ else
   x: a_int  <- lift(*)
   y: int    <- factorial(7)
   z: a_int  <- a_add(x, lift(y))
-  b: a_bool <- a_lt(x, z)
+  b: a_bool <- a_lt(z, lift(0))
 \end{lstlisting}
 \end{column}
 \end{columns}
@@ -264,9 +303,9 @@ else
 \begin{column}{0.7\textwidth}
 \begin{lstlisting}
    x: sym_int  <- lift(*)
-   y: int    <- factorial(7)
+   y: int      <- factorial(7)
    z: sym_int  <- sym_add(x, lift(y))
-   b: sym_bool <- sym_lt(x, z)
+   b: sym_bool <- sym_lt(z, lift(0))
 \end{lstlisting}
 \end{column}
 \begin{column}{0.3\textwidth}
@@ -348,8 +387,6 @@ __Solution:__ use discriminated union type
 
 - similarly deal with recursive structures
 
-TODO image of metadata
-
 ## Function Calls {.t .fragile}
 
 __Problem:__ how to transform functions with symbolic arguments?
@@ -358,6 +395,8 @@ __Problem:__ how to transform functions with symbolic arguments?
 \begin{lstlisting}
     int foo(a: int, b: int, c: int)
 \end{lstlisting}
+
+\pause
 
 - may produce exponentially many duplicates:
 
@@ -370,6 +409,8 @@ __Problem:__ how to transform functions with symbolic arguments?
     ...
 \end{lstlisting}
 - resolve return type
+
+\pause
 
 __Solution__: static analysis + use discriminated union
 
@@ -384,7 +425,7 @@ __Solution__: static analysis + use discriminated union
 
 __Symbolic execution:__
 \begin{columns}
-\begin{column}{0.55\textwidth}
+\begin{column}{0.57\textwidth}
 \vspace{-1em}
 \begin{lstlisting}
   a: pointer <- malloc()
@@ -396,7 +437,7 @@ __Symbolic execution:__
 \end{lstlisting}
 \end{column}
 
-\begin{column}{0.45\textwidth}
+\begin{column}{0.43\textwidth}
 \includegraphics[]{img/execution.pdf}
 \end{column}
 
@@ -409,24 +450,39 @@ __Symbolic execution:__
 
 __Branching example:__
 \begin{columns}
-\begin{column}{0.55\textwidth}
+\begin{column}{0.57\textwidth}
 \vspace{-1em}
 \begin{lstlisting}
   x : sym_int <- lift(*)
   if (*) // nondeterministic
     x': sym_int <- assume(x < 10)
-    y : sym_int <- sym_add(x, 1)
+    y : sym_int <- sym_add(x', 1)
   else
-    x': sym_int <- assume(x < 10)
-    y : sym_int <- sym_sub(x, 1)
+    x': sym_int <- assume(x >= 10)
+    y : sym_int <- sym_sub(x', 1)
 \end{lstlisting}
 \end{column}
-\begin{column}{0.45\textwidth}
+\begin{column}{0.43\textwidth}
 \includegraphics[]{img/branching.pdf}
 \end{column}
 \end{columns}
 
-TODO cycle example?
+## Data Representation II. {.fragile}
+
+__Cycle example:__
+\begin{columns}
+\begin{column}{0.55\textwidth}
+\vspace{-1em}
+\begin{lstlisting}
+  x : sym_int <- lift(*)
+  for i: int <- 1 .. 2
+    x: sym_int <- sym_add(x, 1)
+\end{lstlisting}
+\end{column}
+\begin{column}{0.45\textwidth}
+\includegraphics[]{img/cycle.pdf}
+\end{column}
+\end{columns}
 
 ## Symbolic Verification Algorithm {.t}
 
@@ -453,16 +509,12 @@ Simpler domains do not even need _SMT_ support (sign domain).
 \end{column}
 \end{columns}
 
-TODO ina domena?
-TODO SMT queries?
-
-
 ## Results {.t}
 
 Integrated with DIVINE model checker:
 
 - LLVM-to-LLVM transformation
-- STP SMT solver.
+- STP SMT solver
 
 \pause
 
@@ -493,8 +545,6 @@ __SV-COMP Benchmarks:__
 | recursion     |    81 | **47**  |        43 |   22 |
 | systemc       |    59 | 14      |    **27** |    0 |
 | **total**     |  1160 | 591     |   **625** |  361 |
-
-TODO grafy
 
 ## Conclusion
 
