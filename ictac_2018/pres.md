@@ -16,6 +16,11 @@ lang: english
 date: 18th October 2018
 ...
 
+## Symbolic Computation Motivation
+
+- verify programs with inputs from the enviroment
+- symbolic execution, concolic testing, test generation etc.
+
 ## Symbolic Computation { .t .fragile}
 
 \begin{columns}[t]
