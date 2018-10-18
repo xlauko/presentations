@@ -13,7 +13,6 @@ header-includes:
     - \newcommand\todo[1]{\textcolor{red}{#1}}
 <!-- classoption: t -->
 lang: english
-date: 18th October 2018
 ...
 
 ## Symbolic Computation Motivation
