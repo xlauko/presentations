@@ -17,7 +17,7 @@ lang: english
 
 ## Symbolic Computation Motivation
 
-- verify programs with inputs from the enviroment
+- verify programs with inputs from the environment
 - symbolic execution, concolic testing, test generation etc.
 
 ## Symbolic Computation { .t .fragile}
